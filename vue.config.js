@@ -1,11 +1,4 @@
 module.exports = {
-  pages: {
-    index: {
-      entry: 'examples/main.js',
-      template: 'public/index.html',
-      filename: 'index.html'
-    }
-  },
   css: { extract: false },
   chainWebpack: config => {
     config.module
@@ -17,24 +10,11 @@ module.exports = {
             inline: true,
             name: 'pdf.worker.js'
           })
-    config.resolve.alias
-      .delete('@')
-    if(process.env.NODE_ENV === 'production') {
-      config.module
-        .rule('js')
-          .include
-            .add(__dirname + '/packages')
-            .end()
-    } else {
-      config.resolve.alias
-        .set('examples', __dirname + '/examples')
-        .set('packages', __dirname + '/packages')
-      config.module
-        .rule('js')
+    config.module
+      .rule('js')
         .include
-          .add(__dirname + '/examples')
+          .add(__dirname + '/packages')
           .end()
-    }
   }
 }
 
