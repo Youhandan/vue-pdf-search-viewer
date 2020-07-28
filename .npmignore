@@ -1,0 +1,31 @@
+# Created by .ignore support plugin (hsz.mobi)
+# categories
+.DS_Store
+node_modules
+/examples/
+/packages/
+/public/
+/dist/
+
+# config files
+vue.config.js
+babel.config.js
+*.map
+.eslintignore
+.gitignore
+.editorconfig
+.eslintrc.js
+.browserslistrc
+package-lock.json
+
+# Editor directories and files
+.idea
+.vscode
+.editorconfig
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
