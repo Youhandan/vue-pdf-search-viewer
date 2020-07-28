@@ -1,29 +1,54 @@
-# vue-pdf-preview
+# vue-pdf-search-preview
 
-## Project setup
+## Step1 Install
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+npm install --save vue-pdf-search-preivew
 ```
 
-### Compiles and minifies for production
+## Step2 Config webpack or vue.config(below is vue.config)
 ```
-npm run build
+//vue.config.js
+
+module.exports = {
+   chainWebpack: config => {
+   
+    //...your configs
+    
+    config
+      .plugin('copy')
+      .tap(args => {
+        args[0].push(
+          {
+            context: 'node_modules/vue-pdf-search-viewer/lib/',
+            from: '*.umd.min.*.js',
+            to: 'js/',
+            toType: 'dir'
+          },
+          {
+            from: 'node_modules/vue-pdf-search-viewer/lib/pdf.worker.js',
+            to: 'pdf.worker.js',
+            toType: 'file'
+          },
+        )
+        return args
+      })
+  }
+}
+```
+## Step3 Import and register
+```
+//main.js
+
+import PdfViewer from 'vue-pdf-search-viewer'
+
+Vue.use(PdfViewer)
 ```
 
-### Run your unit tests
+## Example
 ```
-npm run test:unit
+<template>
+  <pdf-viewer src="./compressed.tracemonkey-pldi-09.pdf"></<pdf-viewer>
+</template>
+ 
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## API
