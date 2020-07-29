@@ -1,13 +1,12 @@
 {
   "name": "vue-pdf-search-viewer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": false,
   "description": "Pdf viewer base on Vue.js and Pdf.js, support pdf view, search by keyword and change page",
-  "author": "youhandan, leilibo",
+  "contributors": ["youhandan", "leilibo"],
   "scripts": {
     "lib": "vue-cli-service build --target lib --name vue-pdf-search-viewer --dest lib packages/index.js"
   },
-  "main": "lib/vue-pdf-search-viewer.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.5",
     "pdfjs-dist": "2.0.943"
@@ -20,6 +19,11 @@
     "vue-template-compiler": "^2.6.11",
     "worker-loader": "^2.0.0"
   },
-  "keywords": ["vue", "pdf", "search"],
-  "license": "MIT"
+  "license": "MIT",
+  "keyword": ["vue", "pdf", "search"],
+  "homepage": "https://github.com/Youhandan/vue-pdf-search-preview/tree/lib-release#step1-install",
+  "repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/Youhandan/vue-pdf-search-preview.git"
+  }
 }
