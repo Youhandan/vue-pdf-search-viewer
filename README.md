@@ -1,4 +1,4 @@
-# vue-pdf-preview
+# vue-pdf-search-preview
 
 ## Project setup
 ```
@@ -15,15 +15,19 @@ npm run serve
 npm run build
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
 ### Lints and fixes files
 ```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Project structure
+``` bash
+├── examples    # Example to use unpack lib, in order to debug lib before publish
+├── packages     # Unpack lib code
+├── public      # Static files will be pack to root 
+└── ...            # Other config files
+```
+### Branch
+
+master: Unpack lib and example.  
+dev: lib to release,

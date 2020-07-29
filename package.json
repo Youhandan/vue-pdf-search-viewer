@@ -1,16 +1,14 @@
 {
   "name": "vue-pdf-search-viewer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "description": "Pdf viewer base on Vue.js and Pdf.js, support pdf view, search by keyword and change page",
   "author": "youhandan, leilibo",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint --no-fix",
-    "lib": "vue-cli-service build --target lib --name vue-pdf-search-viewer --dest lib packages/index.js"
+    "lint": "vue-cli-service lint --no-fix"
   },
-  "main": "lib/vue-pdf-search-viewer.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.4.5",
@@ -33,5 +31,5 @@
     "vue-template-compiler": "^2.6.11",
     "worker-loader": "^2.0.0"
   },
-  "keyword": "vue pdf search"
+  "keyword": ["vue", "pdf", "search"]
 }
