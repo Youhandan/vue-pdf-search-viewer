@@ -31,7 +31,7 @@
     "vue-template-compiler": "^2.6.11",
     "worker-loader": "^2.0.0"
   },
-  "keyword": ["vue", "pdf", "search"],
+  "keywords": ["vue", "pdf", "search"],
   "homepage": "https://github.com/Youhandan/vue-pdf-search-preview/tree/lib-release#step1-install",
   "repository" :
   { "type" : "git"
