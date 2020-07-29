@@ -1,5 +1,7 @@
 # vue-pdf-search-preview
 
+Current branch has a example of using unpack lib in order to debug lib before publish.
+
 ## Project setup
 ```
 npm install
