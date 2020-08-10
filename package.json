@@ -7,28 +7,34 @@
     "lib": "vue-cli-service build --target lib --name vue-pdf-search-viewer --dest lib packages/index.js"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
+    "core-js": "3.6.5",
     "pdfjs-dist": "2.0.943"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.0",
-    "@vue/cli-service": "^4.4.0",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11",
-    "worker-loader": "^2.0.0"
+    "@vue/cli-plugin-babel": "4.4.0",
+    "@vue/cli-service": "4.4.0",
+    "node-sass": "4.12.0",
+    "sass-loader": "8.0.2",
+    "vue-template-compiler": "2.6.11",
+    "worker-loader": "2.0.0"
   },
   "license": "MIT",
-  "keywords": ["vue", "pdf", "search"],
+  "keywords": [
+    "vue",
+    "pdf",
+    "search"
+  ],
   "homepage": "https://github.com/Youhandan/vue-pdf-search-preview/tree/lib-release#step1-install",
-  "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/Youhandan/vue-pdf-search-preview.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Youhandan/vue-pdf-search-preview.git"
   },
   "author": "Youhandan",
-  "contributors": [{
-    "name": "sumriser",
-    "email": "sumriser@163.com",
-    "url": "https://github.com/sumriser"
-  }]
+  "contributors": [
+    {
+      "name": "sumriser",
+      "email": "sumriser@163.com",
+      "url": "https://github.com/sumriser"
+    }
+  ]
 }
