@@ -10,32 +10,33 @@ import { PDFLinkService, PDFFindController, PDFViewer, EventBus } from 'pdfjs-di
 import 'pdfjs-dist/web/pdf_viewer.css'
 
 PDFLib.GlobalWorkerOptions.workerSrc = './pdf.worker.js'
-let pdfViewer, pdfLoadingTask
 
 export default {
-  name: 'PdfViewer',
+  name: "PdfViewer",
+  pdfViewer: null,
+  pdfLoadingTask: null,
   props: {
     src: {
       type: String,
-      required: true,
+      required: true
     },
     autoWidth: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   mounted() {
     this.initViewer()
   },
   beforeDestroy() {
-    pdfViewer.eventBus.off('updatefindmatchescount', this.handleMatchResult)
-    pdfViewer.eventBus.off('updatefindcontrolstate', this.handleSearchStateChange)
-    pdfViewer.eventBus.off('pagechanging', this.handlePageChange)
-    pdfViewer.eventBus.off('pagesinit', this.handleLoadPDF)
+    this.pdfViewer.eventBus.off('updatefindmatchescount', this.handleMatchResult)
+    this.pdfViewer.eventBus.off('updatefindcontrolstate', this.handleSearchStateChange)
+    this.pdfViewer.eventBus.off('pagechanging', this.handlePageChange)
+    this.pdfViewer.eventBus.off('pagesinit', this.handleLoadPDF)
 
-    pdfLoadingTask.destroy()
-    pdfViewer = null
-    pdfLoadingTask = null
+    this.pdfLoadingTask.destroy()
+    this.pdfViewer = null
+    this.pdfLoadingTask = null
   },
   methods: {
     initViewer() {
@@ -43,35 +44,40 @@ export default {
       const linkService = new PDFLinkService({ eventBus })
       const findController = new PDFFindController({ eventBus, linkService })
 
-      pdfViewer = new PDFViewer({
+      this.pdfViewer = new PDFViewer({
         container: this.$refs.container,
         eventBus,
         findController,
-        linkService,
+        linkService
       })
-      linkService.setViewer(pdfViewer)
+      linkService.setViewer(this.pdfViewer)
 
-      pdfViewer.eventBus.on('updatefindmatchescount', this.handleMatchResult)
-      pdfViewer.eventBus.on('updatefindcontrolstate', this.handleSearchStateChange)
-      pdfViewer.eventBus.on('pagechanging', this.handlePageChange)
-      pdfViewer.eventBus.on('pagesinit', this.handleLoadPDF)
+      this.pdfViewer.eventBus.on('updatefindmatchescount', this.handleMatchResult)
+      this.pdfViewer.eventBus.on('updatefindcontrolstate', this.handleSearchStateChange)
+      this.pdfViewer.eventBus.on('pagechanging', this.handlePageChange)
+      this.pdfViewer.eventBus.on('pagesinit', this.handleLoadPDF)
 
-      pdfLoadingTask = PDFLib.getDocument({ url: this.src })
+      this.pdfLoadingTask = PDFLib.getDocument({ url: this.src })
 
-      pdfLoadingTask.promise.then((pdfDoc) => {
-        pdfViewer.setDocument(pdfDoc)
+      this.pdfLoadingTask.promise.then((pdfDoc) => {
+        this.pdfViewer.setDocument(pdfDoc)
         linkService.setDocument(pdfDoc)
         this.$emit('on-loaded', pdfDoc.numPages)
       })
     },
     handleMatchResult(e) {
-      this.$emit('on-search', e.matchesCount)
+      let matchesCount = { ...e.matchesCount }
+      const { _matchesCountTotal } = e.source
+      if (_matchesCountTotal > 0 && matchesCount.total === 0) {
+        matchesCount = { current: 1, total: _matchesCountTotal }
+      }
+      this.$emit('on-search', matchesCount)
     },
     handleSearchStateChange(e) {
       if (e.previous !== false) return
-      const { _matchesCountTotal, state } = e.source
-      const { isMatchChinese, query } = state
-      if (_matchesCountTotal === 0 && !isMatchChinese) this.search(query, true)
+      const { isMatchChinese, query } = e.source.state
+      // e.state === 1 means there's no match result
+      if (e.state === 1 && !isMatchChinese) this.search(query, true)
     },
     handlePageChange(e) {
       this.$emit('on-page-change', e.pageNumber)
@@ -80,8 +86,8 @@ export default {
       if (this.autoWidth) this.zoom('auto')
     },
     zoom(scale) {
-      if (scale !== 'auto') return pdfViewer.currentScaleValue = scale
-      pdfViewer.currentScaleValue = 'page-width'
+      if (scale !== 'auto') return this.pdfViewer.currentScaleValue = scale
+      this.pdfViewer.currentScaleValue = 'page-width'
     },
     isChinese(char) {
       return /[\u4e00-\u9fa5]+/.test(char)
@@ -93,7 +99,7 @@ export default {
       let newKeyword = ''
       for (let i = 0; i < keyword.length; i++) {
         let char = keyword[i]
-        const nextChar = keyword[i + 1]
+        let nextChar = keyword[i + 1]
         if (this.isChinese(char) && nextChar && this.isNumberOrLetter(nextChar)) char += ' '
         newKeyword += char
       }
@@ -102,17 +108,17 @@ export default {
     search(keyword, isMatchChinese) {
       let newKeyword = keyword
       if (isMatchChinese) newKeyword = this.matchChinese(keyword)
-      pdfViewer.findController.executeCommand('find', {
+      this.pdfViewer.findController.executeCommand('find', {
         caseSensitive: true,
         phraseSearch: true,
         query: newKeyword,
         findPrevious: false,
         highlightAll: true,
-        isMatchChinese,
+        isMatchChinese
       })
     },
     searchAgain(keyword, prev) {
-      pdfViewer.findController.executeCommand('findagain', {
+      this.pdfViewer.findController.executeCommand('findagain', {
         caseSensitive: true,
         phraseSearch: true,
         query: keyword,
@@ -121,13 +127,13 @@ export default {
       })
     },
     cancelSearch() {
-      pdfViewer.findController._onFindBarClose()
+      this.pdfViewer.findController._onFindBarClose()
       this.$emit('on-search', { current: 0, total: 0 })
     },
     jumpToPage(page) {
-      pdfViewer.currentPageNumber = page
-    },
-  },
+      this.pdfViewer.currentPageNumber = page
+    }
+  }
 }
 </script>
 
