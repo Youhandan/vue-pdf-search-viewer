@@ -96,8 +96,8 @@ export default {
   },
   watch: {
     keyword(newVal) {
+      this.$refs.pdfViewer.cancelSearch()
       if (newVal) this.$refs.pdfViewer.search(newVal)
-      else this.$refs.pdfViewer.cancelSearch()
     },
     showSearchBar(newVal) {
       if (newVal) this.$nextTick(() => this.$refs.searchInput.focus())
@@ -145,7 +145,7 @@ export default {
     },
     handleMatchChange(prev, changeable) {
       if (changeable) {
-        this.$refs.pdfViewer.searchAgain(this.keyword, prev)
+        this.$refs.pdfViewer.searchAgain(prev)
         this.currentMatch += prev ? -1 : 1
       }
     },

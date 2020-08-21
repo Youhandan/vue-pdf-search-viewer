@@ -42,6 +42,7 @@ module.exports = {
     "vue/html-self-closing": 0,
     "vue/attributes-order": 0,
     "no-duplicate-imports": 2,
+    "linebreak-style": 0,
     "no-unused-vars": [
       2,
       {
