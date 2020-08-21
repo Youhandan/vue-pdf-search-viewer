@@ -12,7 +12,7 @@ import 'pdfjs-dist/web/pdf_viewer.css'
 PDFLib.GlobalWorkerOptions.workerSrc = './pdf.worker.js'
 
 export default {
-  name: "PdfViewer",
+  name: 'PdfViewer',
   pdfViewer: null,
   pdfLoadingTask: null,
   props: {
@@ -23,6 +23,11 @@ export default {
     autoWidth: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      realKeyword: ''
     }
   },
   mounted() {
@@ -92,15 +97,15 @@ export default {
     isChinese(char) {
       return /[\u4e00-\u9fa5]+/.test(char)
     },
-    isNumberOrLetter(char) {
-      return /[0-9a-zA-Z]+/.test(char)
+    isNumberLetterOrSpace(char) {
+      return char === ' ' || /[0-9a-zA-Z]+/.test(char)
     },
     matchChinese(keyword) {
       let newKeyword = ''
       for (let i = 0; i < keyword.length; i++) {
         let char = keyword[i]
-        let nextChar = keyword[i + 1]
-        if (this.isChinese(char) && nextChar && this.isNumberOrLetter(nextChar)) char += ' '
+        const nextChar = keyword[i + 1]
+        if (this.isChinese(char) && nextChar && this.isNumberLetterOrSpace(nextChar)) char += ' '
         newKeyword += char
       }
       return newKeyword
@@ -108,6 +113,7 @@ export default {
     search(keyword, isMatchChinese) {
       let newKeyword = keyword
       if (isMatchChinese) newKeyword = this.matchChinese(keyword)
+      this.realKeyword = newKeyword
       this.pdfViewer.findController.executeCommand('find', {
         caseSensitive: true,
         phraseSearch: true,
@@ -117,11 +123,11 @@ export default {
         isMatchChinese
       })
     },
-    searchAgain(keyword, prev) {
+    searchAgain(prev) {
       this.pdfViewer.findController.executeCommand('findagain', {
         caseSensitive: true,
         phraseSearch: true,
-        query: keyword,
+        query: this.realKeyword,
         findPrevious: prev,
         highlightAll: true,
       })
