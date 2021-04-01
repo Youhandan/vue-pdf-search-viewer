@@ -35,10 +35,10 @@
     "pdf",
     "search"
   ],
-  "homepage": "https://github.com/Youhandan/vue-pdf-search-preview/tree/lib-release#step1-install",
+  "homepage": "https://github.com/Youhandan/vue-pdf-search-viewer/tree/lib-release#step1-install",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Youhandan/vue-pdf-search-preview.git"
+    "url": "https://github.com/Youhandan/vue-pdf-search-viewer.git"
   },
   "author": "Youhandan",
   "contributors": [
