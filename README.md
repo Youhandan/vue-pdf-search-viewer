@@ -1,10 +1,10 @@
-# vue-pdf-search-preview
+# vue-pdf-search-viewer
 
 Pdf viewer base on Vue.js and Pdf.js, support pdf view, search by keyword and change page.
 
 ## Step1 Install
 ```
-npm install --save vue-pdf-search-preivew
+npm install --save vue-pdf-search-viewer
 ```
 
 ## Step2 Config webpack or vue.config(below is vue.config)
