@@ -1,6 +1,6 @@
 {
   "name": "vue-pdf-search-viewer",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": false,
   "description": "Pdf viewer base on Vue.js and Pdf.js, support pdf view, search by keyword and change page",
   "scripts": {
