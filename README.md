@@ -1,4 +1,4 @@
-# vue-pdf-search-preview
+# vue-pdf-search-viewer
 
 Current branch has a example of using unpack lib in order to debug lib before publish.
 
