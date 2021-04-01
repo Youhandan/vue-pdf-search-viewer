@@ -38,7 +38,7 @@ dev: lib to release
 
 ### Step1 Install
 ```
-npm install --save vue-pdf-search-preivew
+npm install --save vue-pdf-search-viewer
 ```
 
 ### Step2 Config webpack or vue.config(below is vue.config)
