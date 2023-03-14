@@ -2,6 +2,7 @@
   "name": "vue-pdf-search-viewer",
   "version": "0.2.3",
   "private": false,
+  "main": "lib/vue-pdf-search-viewer.common.js",
   "description": "Pdf viewer base on Vue.js and Pdf.js, support pdf view, search by keyword and change page",
   "scripts": {
     "lib": "vue-cli-service build --target lib --name vue-pdf-search-viewer --dest lib packages/index.js"
